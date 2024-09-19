@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+// Intro mit ASCII-Art und Willkommensnachricht
+
         System.out.println("     +------------+");
         TimeUnit.MILLISECONDS.sleep(100);
         System.out.println("     |  [|||||||]  |");
@@ -32,6 +34,8 @@ public class Main {
         TimeUnit.MILLISECONDS.sleep(100);
         System.out.println("    [__]        [__]");
 
+// Avatar-Name anlegen
+
         String avatar;
         int bestätigung;
         Scanner scan1 = new Scanner(System.in);
@@ -55,6 +59,24 @@ public class Main {
             }
 
         System.out.println("Der Name wurde gespeichert!");
+
+// Spielfeld anlegen
+
+        int x = 1;
+        int y = 0;
+
+        while (y <= 14) {
+            while (x <= 14) {
+                System.out.print("[]");
+                x = x + 1;
+                TimeUnit.MILLISECONDS.sleep(20);
+            }
+            x = 0;
+            System.out.println("[]");
+            x = x + 1;
+            y = y + 1;
+            TimeUnit.MILLISECONDS.sleep(20);
+        }
 
     }
 }
