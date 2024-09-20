@@ -60,23 +60,39 @@ public class Main {
 
         System.out.println("Der Name wurde gespeichert!");
 
-// Spielfeld anlegen
+// Spielfeld anlegen mit vorher abgefragter Roboterposition
+
+        Scanner scan3 = new Scanner(System.in);
+        Scanner scan4 = new Scanner(System.in);
+
+        System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+        int robox = scan3.nextInt();
+        System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+        int roboy = scan4.nextInt();
 
         int x = 1;
         int y = 0;
 
-        while (y <= 14) {
-            while (x <= 14) {
-                System.out.print("[]");
-                x = x + 1;
-                TimeUnit.MILLISECONDS.sleep(20);
+        while (y <= 9) {        // Höhe 10
+            while (x <= 14) {   // Breite 15
+                if (x == robox && y == (roboy - 1)) {
+                    System.out.print("{Ö}");
+                    x = x + 1;
+                } else {
+                    System.out.print("[ ]");
+                    x = x + 1;
+                    TimeUnit.MILLISECONDS.sleep(10);
+                }
             }
             x = 0;
-            System.out.println("[]");
+            System.out.println("[ ]");
             x = x + 1;
             y = y + 1;
-            TimeUnit.MILLISECONDS.sleep(20);
+            TimeUnit.MILLISECONDS.sleep(10);
         }
 
+// Roboterposition ausgeben
+
+        System.out.println("Der Roboter befindet sich in X=" + robox + " Y=" + roboy);
     }
 }
