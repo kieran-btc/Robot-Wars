@@ -71,23 +71,22 @@ public class Main {
         int roboy = scan4.nextInt();
 
         int x = 1;
-        int y = 0;
+        int y = 1;
 
-        while (y <= 9) {        // Höhe 10
-            while (x <= 14) {   // Breite 15
-                if (x == robox && y == (roboy - 1)) {
+        while (y <= 10) {            // Höhe 10
+            x = 1;
+            while (x <= 15) {        // Breite 15
+                if (x == robox && y == roboy) {
                     System.out.print("{Ö}");
-                    x = x + 1;
+                    x++;
                 } else {
                     System.out.print("[ ]");
-                    x = x + 1;
+                    x++;
                     TimeUnit.MILLISECONDS.sleep(10);
                 }
             }
-            x = 0;
-            System.out.println("[ ]");
-            x = x + 1;
-            y = y + 1;
+            System.out.println();
+            y++;
             TimeUnit.MILLISECONDS.sleep(10);
         }
 
