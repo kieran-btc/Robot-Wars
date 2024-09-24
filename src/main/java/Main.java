@@ -28,107 +28,115 @@ public class Main {
 
         String avatar;
         Scanner scan1 = new Scanner(System.in);
+        Scanner scan2 = new Scanner(System.in);
         boolean unerlaubt = true;
+        int bestaetigung = 1;
 
-//        while (bestätigung != 1) {
-//
-//            if (bestätigung == 2) {
-//                System.out.println("Bitte gib den Namen deines Avatars ein: ");
-//                avatar = scan1.nextLine();
-//                System.out.println("Der Name deines Avatars lautet: " + avatar + " Bestätigen (1) oder neu eingeben (2)");
-//                bestätigung = scan2.nextInt();
-//            } else {
-//                System.out.println("Ungültig");
-//                bestätigung = 2;
-//            }
-//        }
+        while (bestaetigung == 1) {
+            System.out.println("Bitte gib den Namen deines Avatars ein: ");
+            avatar = scan1.nextLine();
 
-        System.out.println("Bitte gib den Namen deines Avatars ein: ");
-        avatar = scan1.nextLine();
-
-        while (unerlaubt) {
-            if (avatar.contains("^")) {
-                unerlaubt = true;
-            } else if (avatar.contains("°")) {
-                unerlaubt = true;
-            } else if (avatar.contains("!")) {
-                unerlaubt = true;
-            } else if (avatar.contains("²")) {
-                unerlaubt = true;
-            } else if (avatar.contains("§")) {
-                unerlaubt = true;
-            } else if (avatar.contains("³")) {
-                unerlaubt = true;
-            } else if (avatar.contains("$")) {
-                unerlaubt = true;
-            } else if (avatar.contains("%")) {
-                unerlaubt = true;
-            } else if (avatar.contains("&")) {
-                unerlaubt = true;
-            } else if (avatar.contains("/")) {
-                unerlaubt = true;
-            } else if (avatar.contains("{")) {
-                unerlaubt = true;
-            } else if (avatar.contains("(")) {
-                unerlaubt = true;
-            } else if (avatar.contains("[")) {
-                unerlaubt = true;
-            } else if (avatar.contains(")")) {
-                unerlaubt = true;
-            } else if (avatar.contains("]")) {
-                unerlaubt = true;
-            } else if (avatar.contains("=")) {
-                unerlaubt = true;
-            } else if (avatar.contains("}")) {
-                unerlaubt = true;
-            } else if (avatar.contains("?")) {
-                unerlaubt = true;
-            } else if (avatar.contains("\\")) {
-                unerlaubt = true;
-            } else if (avatar.contains("´")) {
-                unerlaubt = true;
-            } else if (avatar.contains("`")) {
-                unerlaubt = true;
-            } else if (avatar.contains("+")) {
-                unerlaubt = true;
-            } else if (avatar.contains("*")) {
-                unerlaubt = true;
-            } else if (avatar.contains("#")) {
-                unerlaubt = true;
-            } else if (avatar.contains("'")) {
-                unerlaubt = true;
-            } else if (avatar.contains(":")) {
-                unerlaubt = true;
-            } else if (avatar.contains(";")) {
-                unerlaubt = true;
-            } else if (avatar.contains(",")) {
-                unerlaubt = true;
-            } else if (avatar.contains("<")) {
-                unerlaubt = true;
-            } else if (avatar.contains(">")) {
-                unerlaubt = true;
-            } else if (avatar.contains("|")) {
-                unerlaubt = true;
-            } else if (avatar.contains("@")) {
-                unerlaubt = true;
-            } else if (avatar.contains("€")) {
-                unerlaubt = true;
-            } else if (avatar.contains("µ")) {
-                unerlaubt = true;
-            } else if (avatar.contains("\"")) {
-                unerlaubt = true;
-            } else if (avatar.contains(" ")) {
-                unerlaubt = true;
-            } else {
-                unerlaubt = false;
+            while (unerlaubt) {
+                if (avatar.contains("^")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("°")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("!")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("²")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("§")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("³")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("$")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("%")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("&")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("/")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("{")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("(")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("[")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(")")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("]")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("=")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("}")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("?")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("\\")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("´")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("`")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("+")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("*")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("#")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("'")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(":")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(";")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(",")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("<")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(">")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("|")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("@")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("€")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("µ")) {
+                    unerlaubt = true;
+                } else if (avatar.contains("\"")) {
+                    unerlaubt = true;
+                } else if (avatar.contains(" ")) {
+                    unerlaubt = true;
+                } else {
+                    unerlaubt = false;
+                }
+                if (unerlaubt) {
+                    System.out.println("Der Name " + avatar + " enthält ungültige Zeichen. Bitte erneut eingeben: ");
+                    avatar = scan1.nextLine();
+                }
             }
-            if (unerlaubt) {
-                System.out.println("Der Name " + avatar + " enthält ungültige Zeichen. Bitte erneut eingeben: ");
-                avatar = scan1.nextLine();
+            System.out.println("Dein Name lautet: " + avatar + " Speichern (1) oder neu eingeben (2)?");
+            boolean temp_bestaetigung2 = true;
+            while (temp_bestaetigung2) {
+                bestaetigung = scan2.nextInt();
+                if (bestaetigung == 1) {
+                    bestaetigung = 2;
+                    temp_bestaetigung2 = false;
+                    System.out.println("Der Name wurde gespeichert!");
+                    unerlaubt = true;
+                } else if (bestaetigung == 2) {
+                    bestaetigung = 1;
+                    temp_bestaetigung2 = false;
+                    unerlaubt = true;
+                } else {
+                    System.out.println("Ungültig. Bitte bestätigen (1) oder neu eingeben (2).");
+                    temp_bestaetigung2 = true;
+                    unerlaubt = true;
+                }
             }
         }
-
-        System.out.println("Dein Name wurde gespeichert! Er lautet: " + avatar);
 
 // Spielfeld anlegen mit vorher abgefragter Roboterposition
 
