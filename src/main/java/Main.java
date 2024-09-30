@@ -2,6 +2,45 @@ import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
 
 public class Main {
+
+    public static String spielfeld(String [][] board) {
+        Scanner scan3 = new Scanner(System.in);
+        Scanner scan4 = new Scanner(System.in);
+        boolean position = true;
+        int robox = 1;
+        int roboy = 1;
+
+        while (position) {
+            System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+            robox = scan3.nextInt() - 1;
+            System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+            roboy = scan4.nextInt() - 1;
+
+            if (robox < 0 || robox > 14 || roboy < 0 || roboy > 9) {
+                position = true;
+                System.out.println("Mindestens eine Koordinate befindet sich außerhalb des Spieldfeldes. Bitte erneut eingeben.");
+            } else {
+                position = false;
+            }
+        }
+        board[roboy][robox] = "[Ö]";
+        return board[roboy][robox];
+    }
+
+    public static void printSpielfeld(String [][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                System.out.print(board[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void spielzug(String [][] board) {
+        System.out.println("Bewege deinen Roboter (WASD) oder auf Positon bleiben (Q)");
+
+    }
+
     public static void main(String[] args) throws InterruptedException {
 
 // Intro mit ASCII-Art und Willkommensnachricht
@@ -140,48 +179,26 @@ public class Main {
 
 // Spielfeld anlegen mit vorher abgefragter Roboterposition
 
-        Scanner scan3 = new Scanner(System.in);
-        Scanner scan4 = new Scanner(System.in);
-        boolean position = true;
-        int robox = 1;
-        int roboy = 1;
+        String[][] board = {
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
+                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}
+        };
 
-        while (position) {
-            System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
-            robox = scan3.nextInt();
-            System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
-            roboy = scan4.nextInt();
+        spielfeld(board);
+        printSpielfeld(board);
 
-            if (robox < 1 || robox > 15 || roboy < 1 || roboy > 10) {
-                position = true;
-                System.out.println("Mindestens eine Koordinate befindet sich außerhalb des Spieldfeldes. Bitte erneut eingeben.");
-            } else {
-                position = false;
-            }
-        }
-
-        int x = 1;
-        int y = 1;
-
-        while (y <= 10) {            // Höhe 10
-            x = 1;
-            while (x <= 15) {        // Breite 15
-                if (x == robox && y == roboy) {
-                    System.out.print("{Ö}");
-                    x++;
-                } else {
-                    System.out.print("[ ]");
-                    x++;
-                    TimeUnit.MILLISECONDS.sleep(10);
-                }
-            }
-            System.out.println();
-            y++;
-            TimeUnit.MILLISECONDS.sleep(10);
-        }
-
+/*
 // Roboterposition ausgeben
 
         System.out.println("Der Roboter befindet sich in X=" + robox + " Y=" + roboy);
+ */
     }
 }
