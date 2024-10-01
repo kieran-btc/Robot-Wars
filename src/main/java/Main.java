@@ -1,5 +1,6 @@
 import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
@@ -12,7 +13,7 @@ public class Main {
         }
     }
 
-    public static int[] spielzug(String[][] board, int robox, int roboy) {
+    public static int[] spielzug(String[][] board, int robox, int roboy, char robo1Symbol) {
         System.out.println("Bewege deinen Roboter (WASD) oder auf Position bleiben (Q)");
         boolean check_move = true;
         Scanner scan = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class Main {
                 case "W", "w" -> {
                     if (roboy > 0) {
                         board[roboy][robox] = "[ ]";
-                        board[roboy - 1][robox] = "[Ö]";
+                        board[roboy - 1][robox] = "[" + robo1Symbol + "]";
                         roboy -= 1;
                         check_move = false;
                     } else {
@@ -33,7 +34,7 @@ public class Main {
                 case "A", "a" -> {
                     if (robox > 0) {
                         board[roboy][robox] = "[ ]";
-                        board[roboy][robox - 1] = "[Ö]";
+                        board[roboy][robox - 1] = "[" + robo1Symbol + "]";
                         robox -= 1;
                         check_move = false;
                     } else {
@@ -43,7 +44,7 @@ public class Main {
                 case "S", "s" -> {
                     if (roboy < 9) {
                         board[roboy][robox] = "[ ]";
-                        board[roboy + 1][robox] = "[Ö]";
+                        board[roboy + 1][robox] = "[" + robo1Symbol + "]";
                         roboy += 1;
                         check_move = false;
                     } else {
@@ -53,7 +54,7 @@ public class Main {
                 case "D", "d" -> {
                     if (robox < 14) {
                         board[roboy][robox] = "[ ]";
-                        board[roboy][robox + 1] = "[Ö]";
+                        board[roboy][robox + 1] = "[" + robo1Symbol + "]";
                         robox += 1;
                         check_move = false;
                     } else {
@@ -90,98 +91,99 @@ public class Main {
 
 // Avatar-Name anlegen und check auf unerlaubte Zeichen
 
-        String avatar;
+        String robo1Name;
+        String robo2Name;
         Scanner scan1 = new Scanner(System.in);
         Scanner scan2 = new Scanner(System.in);
         boolean unerlaubt = true;
         int bestaetigung = 1;
 
         while (bestaetigung == 1) {
-            System.out.println("Bitte gib den Namen deines Avatars ein: ");
-            avatar = scan1.nextLine();
+            System.out.println("Bitte gib den Namen von Roboter 1 ein: ");
+            robo1Name = scan1.nextLine();
 
             while (unerlaubt) {
-                if (avatar.contains("^")) {
+                if (robo1Name.contains("^")) {
                     unerlaubt = true;
-                } else if (avatar.contains("°")) {
+                } else if (robo1Name.contains("°")) {
                     unerlaubt = true;
-                } else if (avatar.contains("!")) {
+                } else if (robo1Name.contains("!")) {
                     unerlaubt = true;
-                } else if (avatar.contains("²")) {
+                } else if (robo1Name.contains("²")) {
                     unerlaubt = true;
-                } else if (avatar.contains("§")) {
+                } else if (robo1Name.contains("§")) {
                     unerlaubt = true;
-                } else if (avatar.contains("³")) {
+                } else if (robo1Name.contains("³")) {
                     unerlaubt = true;
-                } else if (avatar.contains("$")) {
+                } else if (robo1Name.contains("$")) {
                     unerlaubt = true;
-                } else if (avatar.contains("%")) {
+                } else if (robo1Name.contains("%")) {
                     unerlaubt = true;
-                } else if (avatar.contains("&")) {
+                } else if (robo1Name.contains("&")) {
                     unerlaubt = true;
-                } else if (avatar.contains("/")) {
+                } else if (robo1Name.contains("/")) {
                     unerlaubt = true;
-                } else if (avatar.contains("{")) {
+                } else if (robo1Name.contains("{")) {
                     unerlaubt = true;
-                } else if (avatar.contains("(")) {
+                } else if (robo1Name.contains("(")) {
                     unerlaubt = true;
-                } else if (avatar.contains("[")) {
+                } else if (robo1Name.contains("[")) {
                     unerlaubt = true;
-                } else if (avatar.contains(")")) {
+                } else if (robo1Name.contains(")")) {
                     unerlaubt = true;
-                } else if (avatar.contains("]")) {
+                } else if (robo1Name.contains("]")) {
                     unerlaubt = true;
-                } else if (avatar.contains("=")) {
+                } else if (robo1Name.contains("=")) {
                     unerlaubt = true;
-                } else if (avatar.contains("}")) {
+                } else if (robo1Name.contains("}")) {
                     unerlaubt = true;
-                } else if (avatar.contains("?")) {
+                } else if (robo1Name.contains("?")) {
                     unerlaubt = true;
-                } else if (avatar.contains("\\")) {
+                } else if (robo1Name.contains("\\")) {
                     unerlaubt = true;
-                } else if (avatar.contains("´")) {
+                } else if (robo1Name.contains("´")) {
                     unerlaubt = true;
-                } else if (avatar.contains("`")) {
+                } else if (robo1Name.contains("`")) {
                     unerlaubt = true;
-                } else if (avatar.contains("+")) {
+                } else if (robo1Name.contains("+")) {
                     unerlaubt = true;
-                } else if (avatar.contains("*")) {
+                } else if (robo1Name.contains("*")) {
                     unerlaubt = true;
-                } else if (avatar.contains("#")) {
+                } else if (robo1Name.contains("#")) {
                     unerlaubt = true;
-                } else if (avatar.contains("'")) {
+                } else if (robo1Name.contains("'")) {
                     unerlaubt = true;
-                } else if (avatar.contains(":")) {
+                } else if (robo1Name.contains(":")) {
                     unerlaubt = true;
-                } else if (avatar.contains(";")) {
+                } else if (robo1Name.contains(";")) {
                     unerlaubt = true;
-                } else if (avatar.contains(",")) {
+                } else if (robo1Name.contains(",")) {
                     unerlaubt = true;
-                } else if (avatar.contains("<")) {
+                } else if (robo1Name.contains("<")) {
                     unerlaubt = true;
-                } else if (avatar.contains(">")) {
+                } else if (robo1Name.contains(">")) {
                     unerlaubt = true;
-                } else if (avatar.contains("|")) {
+                } else if (robo1Name.contains("|")) {
                     unerlaubt = true;
-                } else if (avatar.contains("@")) {
+                } else if (robo1Name.contains("@")) {
                     unerlaubt = true;
-                } else if (avatar.contains("€")) {
+                } else if (robo1Name.contains("€")) {
                     unerlaubt = true;
-                } else if (avatar.contains("µ")) {
+                } else if (robo1Name.contains("µ")) {
                     unerlaubt = true;
-                } else if (avatar.contains("\"")) {
+                } else if (robo1Name.contains("\"")) {
                     unerlaubt = true;
-                } else if (avatar.contains(" ")) {
+                } else if (robo1Name.contains(" ")) {
                     unerlaubt = true;
                 } else {
                     unerlaubt = false;
                 }
                 if (unerlaubt) {
-                    System.out.println("Der Name " + avatar + " enthält ungültige Zeichen. Bitte erneut eingeben: ");
-                    avatar = scan1.nextLine();
+                    System.out.println("Der Name " + robo1Name + " enthält ungültige Zeichen. Bitte erneut eingeben: ");
+                    robo1Name = scan1.nextLine();
                 }
             }
-            System.out.println("Dein Name lautet: " + avatar + " Speichern (1) oder neu eingeben (2)?");
+            System.out.println("Dein Name lautet: " + robo1Name + " Speichern (1) oder neu eingeben (2)?");
             boolean temp_bestaetigung2 = true;
             while (temp_bestaetigung2) {
                 bestaetigung = scan2.nextInt();
@@ -202,6 +204,125 @@ public class Main {
             }
         }
 
+        char robo1Symbol;
+        System.out.println("Bitte gib das Symbol ein, mit dem Roboter 1 dargestellt werden soll:");
+        robo1Symbol = scan1.nextLine().charAt(0);
+        System.out.println("Roboter 1: " + robo1Symbol);
+
+        unerlaubt = true;
+        bestaetigung = 1;
+
+        while (bestaetigung == 1) {
+            System.out.println("Bitte gib den Namen von Roboter 2 ein: ");
+            robo2Name = scan1.nextLine();
+
+            while (unerlaubt) {
+                if (robo2Name.contains("^")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("°")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("!")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("²")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("§")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("³")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("$")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("%")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("&")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("/")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("{")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("(")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("[")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(")")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("]")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("=")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("}")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("?")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("\\")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("´")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("`")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("+")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("*")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("#")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("'")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(":")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(";")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(",")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("<")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(">")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("|")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("@")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("€")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("µ")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains("\"")) {
+                    unerlaubt = true;
+                } else if (robo2Name.contains(" ")) {
+                    unerlaubt = true;
+                } else {
+                    unerlaubt = false;
+                }
+                if (unerlaubt) {
+                    System.out.println("Der Name " + robo2Name + " enthält ungültige Zeichen. Bitte erneut eingeben: ");
+                    robo2Name = scan1.nextLine();
+                }
+            }
+            System.out.println("Dein Name lautet: " + robo2Name + " Speichern (1) oder neu eingeben (2)?");
+            boolean temp_bestaetigung2 = true;
+            while (temp_bestaetigung2) {
+                bestaetigung = scan2.nextInt();
+                if (bestaetigung == 1) {
+                    bestaetigung = 2;
+                    temp_bestaetigung2 = false;
+                    System.out.println("Der Name wurde gespeichert!");
+                    unerlaubt = true;
+                } else if (bestaetigung == 2) {
+                    bestaetigung = 1;
+                    temp_bestaetigung2 = false;
+                    unerlaubt = true;
+                } else {
+                    System.out.println("Ungültig. Bitte bestätigen (1) oder neu eingeben (2).");
+                    temp_bestaetigung2 = true;
+                    unerlaubt = true;
+                }
+            }
+        }
+        char robo2Symbol;
+        System.out.println("Bitte gib das Symbol ein, mit dem Roboter 2 dargestellt werden soll:");
+        robo2Symbol = scan1.nextLine().charAt(0);
+        System.out.println("Roboter 1: " + robo2Symbol);
+
+
 // Spielfeld anlegen mit vorher abgefragter Roboterposition
 
         String[][] board = {{"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}};
@@ -209,38 +330,58 @@ public class Main {
         Scanner scan3 = new Scanner(System.in);
         Scanner scan4 = new Scanner(System.in);
         boolean position = true;
-        int robox;
-        int roboy;
+        int robo1X;
+        int robo1Y;
         System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
-        robox = scan3.nextInt() - 1;
+        robo1X = scan3.nextInt() - 1;
         System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
-        roboy = scan4.nextInt() - 1;
+        robo1Y = scan4.nextInt() - 1;
 
         while (position) {
-            if (robox < 0 || robox > 14 || roboy < 0 || roboy > 9) {
+            if (robo1X < 0 || robo1X > 14 || robo1Y < 0 || robo1Y > 9) {
                 position = true;
                 System.out.println("Mindestens eine Koordinate befindet sich außerhalb des Spieldfeldes. Bitte erneut eingeben.");
                 System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
-                robox = scan3.nextInt() - 1;
+                robo1X = scan3.nextInt() - 1;
                 System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
-                roboy = scan4.nextInt() - 1;
+                robo1Y = scan4.nextInt() - 1;
             } else {
                 position = false;
             }
         }
-        board[roboy][robox] = "[Ö]";
+        board[robo1Y][robo1X] = "[" + robo1Symbol + "]";
+
+        Random random = new Random();
+        int robo2X = random.nextInt(14);
+        int robo2Y = random.nextInt(9);
+
+        if (robo2X == robo1X && robo2Y == robo1Y) {
+            robo2X = random.nextInt(14);
+            robo2Y = random.nextInt(9);
+        }
+        if (robo2X == robo1X && robo2Y == robo1Y) {
+            robo2X = random.nextInt(14);
+            robo2Y = random.nextInt(9);
+        }
+        if (robo2X == robo1X && robo2Y == robo1Y) {
+            robo2X = random.nextInt(14);
+            robo2Y = random.nextInt(9);
+        }
+
+        board[robo2Y][robo2X] = "[" + robo2Symbol + "]";
+
         printSpielfeld(board);
 
+        System.out.println("\nRoboter 1 befindet sich in X=" + robo1X + " Y=" + robo1Y);
+
+        System.out.println("\nRoboter 2 befindet sich in X=" + (robo2X + 1) + " Y=" + (robo2Y + 1));
+        System.out.println();
+
         for (int i = 0; i < 100; i++) {
-            int[] neuePosition = spielzug(board, robox, roboy);
-            robox = neuePosition[0];
-            roboy = neuePosition[1];
+            int[] neuePosition = spielzug(board, robo1X, robo1Y, robo1Symbol);
+            robo1X = neuePosition[0];
+            robo1Y = neuePosition[1];
             printSpielfeld(board);
         }
-/*
-// Roboterposition ausgeben
-
-        System.out.println("Der Roboter befindet sich in X=" + robox + " Y=" + roboy);
- */
     }
 }
