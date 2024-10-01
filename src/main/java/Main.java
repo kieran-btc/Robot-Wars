@@ -12,40 +12,58 @@ public class Main {
         }
     }
 
-    public static String spielzug(String[][] board, int robox, int roboy) {
+    public static int[] spielzug(String[][] board, int robox, int roboy) {
         System.out.println("Bewege deinen Roboter (WASD) oder auf Position bleiben (Q)");
         boolean check_move = true;
         Scanner scan = new Scanner(System.in);
 
         while (check_move) {
-        String move = scan.nextLine();
-            if (move.equals("W") || move.equals("w")) {
-                board[roboy][robox] = "[ ]";
-                board[roboy - 1][robox] = "[Ö]";
-//                board[roboy][robox] = board[roboy - 1][robox];
-                check_move = false;
-            } else if (move.equals("A") || move.equals("a")) {
-                board[roboy][robox] = "[ ]";
-                board[roboy + 1][robox] = "[Ö]";
-//                board[roboy][robox] = board[roboy + 1][robox];
-                check_move = false;
-            } else if (move.equals("S") || move.equals("s")) {
-                board[roboy][robox] = "[ ]";
-                board[roboy][robox - 1] = "[Ö]";
-//                board[roboy][robox] = board[roboy][robox - 1];
-                check_move = false;
-            } else if (move.equals("D") || move.equals("d")) {
-                board[roboy][robox] = "[ ]";
-                board[roboy][robox + 1] = "[Ö]";
-//                board[roboy][robox] = board[roboy][robox + 1];
-                check_move = false;
-            } else if (move.equals("Q") || move.equals("q")) {
-                check_move = false;
-            } else {
-                System.out.println("Ungültig. Bitte neu eingeben");
+            String move = scan.nextLine();
+            switch (move) {
+                case "W", "w" -> {
+                    if (roboy > 0) {
+                        board[roboy][robox] = "[ ]";
+                        board[roboy - 1][robox] = "[Ö]";
+                        roboy -= 1;
+                        check_move = false;
+                    } else {
+                        System.out.println("Ungültiger Zug. Du kannst nicht weiter nach oben.");
+                    }
+                }
+                case "A", "a" -> {
+                    if (robox > 0) {
+                        board[roboy][robox] = "[ ]";
+                        board[roboy][robox - 1] = "[Ö]";
+                        robox -= 1;
+                        check_move = false;
+                    } else {
+                        System.out.println("Ungültiger Zug. Du kannst nicht weiter nach links.");
+                    }
+                }
+                case "S", "s" -> {
+                    if (roboy < 9) {
+                        board[roboy][robox] = "[ ]";
+                        board[roboy + 1][robox] = "[Ö]";
+                        roboy += 1;
+                        check_move = false;
+                    } else {
+                        System.out.println("Ungültiger Zug. Du kannst nicht weiter nach unten.");
+                    }
+                }
+                case "D", "d" -> {
+                    if (robox < 14) {
+                        board[roboy][robox] = "[ ]";
+                        board[roboy][robox + 1] = "[Ö]";
+                        robox += 1;
+                        check_move = false;
+                    } else {
+                        System.out.println("Ungültiger Zug. Du kannst nicht weiter nach rechts.");
+                    }
+                }
+                case "Q", "q" -> check_move = false;
             }
         }
-        return board[roboy][robox];
+        return new int[]{robox, roboy};
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -186,44 +204,39 @@ public class Main {
 
 // Spielfeld anlegen mit vorher abgefragter Roboterposition
 
-        String[][] board = {
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"},
-                {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}
-        };
+        String[][] board = {{"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}, {"[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]"}};
 
         Scanner scan3 = new Scanner(System.in);
         Scanner scan4 = new Scanner(System.in);
         boolean position = true;
-        int robox = 1;
-        int roboy = 1;
+        int robox;
+        int roboy;
+        System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+        robox = scan3.nextInt() - 1;
+        System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+        roboy = scan4.nextInt() - 1;
 
         while (position) {
-            System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
-            robox = scan3.nextInt() - 1;
-            System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
-            roboy = scan4.nextInt() - 1;
-
             if (robox < 0 || robox > 14 || roboy < 0 || roboy > 9) {
                 position = true;
                 System.out.println("Mindestens eine Koordinate befindet sich außerhalb des Spieldfeldes. Bitte erneut eingeben.");
+                System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+                robox = scan3.nextInt() - 1;
+                System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+                roboy = scan4.nextInt() - 1;
             } else {
                 position = false;
             }
         }
         board[roboy][robox] = "[Ö]";
-
-        printSpielfeld(board);
-        spielzug(board, robox, roboy);
         printSpielfeld(board);
 
+        for (int i = 0; i < 100; i++) {
+            int[] neuePosition = spielzug(board, robox, roboy);
+            robox = neuePosition[0];
+            roboy = neuePosition[1];
+            printSpielfeld(board);
+        }
 /*
 // Roboterposition ausgeben
 
