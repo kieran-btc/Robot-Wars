@@ -91,8 +91,8 @@ public class Main {
 
 // Avatar-Name anlegen und check auf unerlaubte Zeichen
 
-        String robo1Name;
-        String robo2Name;
+        String robo1Name = "Markus";
+        String robo2Name = "Sandra";
         Scanner scan1 = new Scanner(System.in);
         Scanner scan2 = new Scanner(System.in);
         boolean unerlaubt = true;
@@ -205,9 +205,9 @@ public class Main {
         }
 
         char robo1Symbol;
-        System.out.println("Bitte gib das Symbol ein, mit dem Roboter 1 dargestellt werden soll:");
+        System.out.println("Bitte gib das Symbol ein, mit dem " + robo1Name + " dargestellt werden soll:");
         robo1Symbol = scan1.nextLine().charAt(0);
-        System.out.println("Roboter 1: " + robo1Symbol);
+        System.out.println(robo1Name + ": " + robo1Symbol);
 
         unerlaubt = true;
         bestaetigung = 1;
@@ -318,9 +318,9 @@ public class Main {
             }
         }
         char robo2Symbol;
-        System.out.println("Bitte gib das Symbol ein, mit dem Roboter 2 dargestellt werden soll:");
+        System.out.println("Bitte gib das Symbol ein, mit dem " + robo2Name + " dargestellt werden soll:");
         robo2Symbol = scan1.nextLine().charAt(0);
-        System.out.println("Roboter 1: " + robo2Symbol);
+        System.out.println(robo2Name + ": " + robo2Symbol);
 
 
 // Spielfeld anlegen mit vorher abgefragter Roboterposition
@@ -332,18 +332,18 @@ public class Main {
         boolean position = true;
         int robo1X;
         int robo1Y;
-        System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+        System.out.println("Auf welcher X-Position (1-15) möchtest du mit " + robo1Name + " starten?");
         robo1X = scan3.nextInt() - 1;
-        System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+        System.out.println("Auf welcher Y-Position (1-10) möchtest du mit " + robo1Name + " starten?");
         robo1Y = scan4.nextInt() - 1;
 
         while (position) {
             if (robo1X < 0 || robo1X > 14 || robo1Y < 0 || robo1Y > 9) {
                 position = true;
                 System.out.println("Mindestens eine Koordinate befindet sich außerhalb des Spieldfeldes. Bitte erneut eingeben.");
-                System.out.println("Auf welcher X-Position (1-15) möchtest du mit deinem Roboter starten?");
+                System.out.println("Auf welcher X-Position (1-15) möchtest du mit " + robo1Name + " starten?");
                 robo1X = scan3.nextInt() - 1;
-                System.out.println("Auf welcher Y-Position (1-10) möchtest du mit deinem Roboter starten?");
+                System.out.println("Auf welcher Y-Position (1-10) möchtest du mit " + robo1Name + " starten?");
                 robo1Y = scan4.nextInt() - 1;
             } else {
                 position = false;
@@ -372,16 +372,53 @@ public class Main {
 
         printSpielfeld(board);
 
-        System.out.println("\nRoboter 1 befindet sich in X=" + robo1X + " Y=" + robo1Y);
+        System.out.println("\nRoboter 1 befindet sich in X=" + (robo1X + 1) + " Y=" + (robo1Y + 1));
 
         System.out.println("\nRoboter 2 befindet sich in X=" + (robo2X + 1) + " Y=" + (robo2Y + 1));
         System.out.println();
 
-        for (int i = 0; i < 100; i++) {
-            int[] neuePosition = spielzug(board, robo1X, robo1Y, robo1Symbol);
-            robo1X = neuePosition[0];
-            robo1Y = neuePosition[1];
-            printSpielfeld(board);
+        int robo1Random = 0;
+        int robo2Random = 0;
+
+        for (int i = 0; i < 1000; i++) {
+            if (robo1X == robo2X && robo1Y == robo2Y) {
+                board[robo2Y][robo2X] = "[!]";
+                System.out.println();
+                printSpielfeld(board);
+                TimeUnit.MILLISECONDS.sleep(2500);
+                System.out.println("\n" + robo1Name + " und " + robo2Name + " treffen aufeinander. Es findet ein KAMPF statt!");
+                while (robo1Random == robo2Random) {
+                    TimeUnit.MILLISECONDS.sleep(2500);
+                    robo1Random = (random.nextInt(6) + 1);
+                    System.out.println("\n" + robo1Name + " würfelt eine " + robo1Random);
+                    TimeUnit.MILLISECONDS.sleep(2500);
+                    robo2Random = (random.nextInt(6) + 1);
+                    System.out.println("\n" + robo2Name + " würfelt eine " + robo2Random);
+                    System.out.println();
+                    if (robo1Random == robo2Random) {
+                        TimeUnit.MILLISECONDS.sleep(2500);
+                        System.out.println("Gleiche Zahl. NOCHMAL!");
+                    } else {
+                        if (robo1Random > robo2Random) {
+                            TimeUnit.MILLISECONDS.sleep(2700);
+                            board[robo1Y][robo1X] = "[" + robo1Symbol + "]";
+                            printSpielfeld(board);
+                            System.out.println("\n" + robo1Name + " hat gewonnen!!!");
+                        } else {
+                            TimeUnit.MILLISECONDS.sleep(2700);
+                            board[robo2Y][robo2X] = "[" + robo2Symbol + "]";
+                            printSpielfeld(board);
+                            System.out.println("\n" + robo2Name + " hat gewonnen!!!");
+                        }
+                    }
+                }
+                i = 1000;
+            } else {
+                int[] neuePosition = spielzug(board, robo1X, robo1Y, robo1Symbol);
+                robo1X = neuePosition[0];
+                robo1Y = neuePosition[1];
+                printSpielfeld(board);
+            }
         }
     }
 }
