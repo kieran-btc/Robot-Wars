@@ -91,8 +91,8 @@ public class Main {
 
 // Avatar-Name anlegen und check auf unerlaubte Zeichen
 
-        String robo1Name = "Markus";
-        String robo2Name = "Sandra";
+        String robo1Name = "A";
+        String robo2Name = "B";
         Scanner scan1 = new Scanner(System.in);
         Scanner scan2 = new Scanner(System.in);
         boolean unerlaubt = true;
